@@ -1,0 +1,4 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "cmake.sourceDirectory": "C:/learning_flutter/Apps_flutter/sneaker_app/linux/flutter"
+}
