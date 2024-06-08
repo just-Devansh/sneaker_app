@@ -38,7 +38,7 @@ class MyDrawer extends StatelessWidget {
 
               // home page tile
               Padding(
-                padding: const EdgeInsets.only(left: 25.0),
+                padding: const EdgeInsets.only(top: 10.0, left: 25.0),
                 child: ListTile(
                   leading: Icon(
                     Icons.home,
