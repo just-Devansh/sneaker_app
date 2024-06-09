@@ -14,6 +14,39 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  // adding a SCROLL animation to 'See all'
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollToEnd() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 3),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  // add shoe to cart
+  // I TOTALLY DONT UNDERSTAND THIS RIDER|PROVIDER SHIT. LOL!
+  void addShoetoCart(Shoe shoe) {
+    Provider.of<Cart>(context, listen: false).addtoCart(shoe);
+
+    // alert the user, shoe succesfully added
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Succesfully added!',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Text(
+          'Check your cart',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.grey[900],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(
@@ -67,11 +100,14 @@ class _ShopPageState extends State<ShopPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  'See all',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                GestureDetector(
+                  onTap: _scrollToEnd,
+                  child: Text(
+                    'See all',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
               ],
@@ -82,6 +118,7 @@ class _ShopPageState extends State<ShopPage> {
 
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
               itemCount: 6,
               itemBuilder: (context, index) {
@@ -89,7 +126,10 @@ class _ShopPageState extends State<ShopPage> {
                 Shoe shoe = value.getShoeList()[index];
 
                 // return the shoe
-                return ShoeTile(shoe: shoe);
+                return ShoeTile(
+                  shoe: shoe,
+                  onTap: () => addShoetoCart(shoe),
+                );
               },
             ),
           ),
