@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/models/shoe.dart';
@@ -95,8 +97,6 @@ class ShoeTile extends StatelessWidget {
               ],
             ),
           )
-
-          // button to add to cart
         ],
       ),
     );
